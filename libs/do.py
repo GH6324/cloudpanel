@@ -80,7 +80,7 @@ class DoApi():
         return True
 
     # 创建实例
-    def create_droplet(self, name='cdntip', password='admin7788==', count=1, region='sfo3', size='s-1vcpu-1gb', image='centos-7-x64'):
+    def create_droplet(self, name='panel', password='admin7788==', count=1, region='sfo3', size='s-1vcpu-1gb', image='centos-7-x64'):
         try:
             url = f"{self.api_url}/v2/droplets"
 

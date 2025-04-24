@@ -199,7 +199,7 @@ class LightsailGetImagesView(View):
 class LightsailCreateInstanceView(View):
     # 创建 Lightsail
     def post(self, request):
-        password = request.POST.get('password', 'cdntip778899==')
+        password = request.POST.get('password', 'panel778899==')
         name = request.POST.get('name', '')
         images_id = request.POST.get('images_id', False)
         region = request.POST.get('region', False)

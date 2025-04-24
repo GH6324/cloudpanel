@@ -66,7 +66,7 @@ python manage.py aws_update_images
 #### 1. 创建 Docker 网络
 
 ```bash
-docker network create cdntip_network
+docker network create panel_network
 ```
 
 #### 2. 启动 MySQL 数据库
@@ -74,7 +74,7 @@ docker network create cdntip_network
 ```bash
 mkdir /data
 docker run -d -it \
-  --network cdntip_network \
+  --network panel_network \
   -v /data/mysql:/var/lib/mysql \
   --name panel_mysql \
   -e MYSQL_ROOT_PASSWORD=root \
@@ -88,10 +88,10 @@ docker run -d -it \
 
 ```bash
 docker run -d -it \
-  --network cdntip_network \
+  --network panel_network \
   -p 8111:80 \
   --name panel \
-  cdntip/panel
+  panel/panel
 ```
 
 #### 4. 创建管理员账户

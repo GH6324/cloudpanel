@@ -738,7 +738,7 @@ class AwsApi():
 
 
     # 创建vpc
-    def ec2_create_vpc(self, cidr="10.0.0.0/24", name='cdntip'):
+    def ec2_create_vpc(self, cidr="10.0.0.0/24", name='panel'):
         self.cidr = cidr
         response = self.client.create_vpc(
             CidrBlock=cidr,
@@ -759,9 +759,9 @@ class AwsApi():
         vpc_id = response['Vpc']['VpcId']
         self.VpcId = vpc_id
         self.ec2_create_subnet(vpc_id, cidr, name)
-        self.ec2_create_internet_gateway('cdntip')
+        self.ec2_create_internet_gateway('panel')
 
-    def ec2_create_subnet(self, vpc, cidr="10.0.0.0/24", name='cdntip'):
+    def ec2_create_subnet(self, vpc, cidr="10.0.0.0/24", name='panel'):
         response = self.client.create_subnet(
             CidrBlock=cidr,
             VpcId=vpc,

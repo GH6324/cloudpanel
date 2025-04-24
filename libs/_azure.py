@@ -270,7 +270,7 @@ class AzureApi():
             return False
 
     # 创建公网IP
-    def create_public_ip(self, public_ip_name='cdntip', location='eastus'):
+    def create_public_ip(self, public_ip_name='panel', location='eastus'):
         try:
             url = f'https://management.azure.com/subscriptions/{self.subscriptionId}/resourceGroups/{self.group_name}/providers/Microsoft.Network/publicIPAddresses/{public_ip_name}_public_ip?api-version=2020-11-01'
             data = {
@@ -294,7 +294,7 @@ class AzureApi():
             return False
 
     # 创建 虚拟网络 子网
-    def create_subnet(self, vnet_name='AzureVneteastasia', sub_name='cdntip'):
+    def create_subnet(self, vnet_name='AzureVneteastasia', sub_name='panel'):
         # 需要先查询子网是否存在
         url = f'https://management.azure.com/subscriptions/{self.subscriptionId}/resourceGroups/{self.group_name}/providers/Microsoft.Network/virtualNetworks/{vnet_name}/subnets/{sub_name}_subnet?api-version=2020-11-01'
 
@@ -321,7 +321,7 @@ class AzureApi():
             return False
 
     # 创建网络接口
-    def create_nic(self, location='eastus', nic_name='cdntip', public_ip_id=None, subnet_id=''):
+    def create_nic(self, location='eastus', nic_name='panel', public_ip_id=None, subnet_id=''):
         try:
             url = f'https://management.azure.com/subscriptions/{self.subscriptionId}/resourceGroups/{self.group_name}/providers/Microsoft.Network/networkInterfaces/{nic_name}_nic?api-version=2020-11-01'
             data = {
@@ -352,7 +352,7 @@ class AzureApi():
             return False
 
     # 重置网络接口  换IP
-    def reset_nic(self, nic_name='cdntip'):
+    def reset_nic(self, nic_name='panel'):
         try:
             # 1. 先查询网络接口信息
             url = f'https://management.azure.com/subscriptions/{self.subscriptionId}/resourceGroups/{self.group_name}/providers/Microsoft.Network/networkInterfaces/{nic_name}?api-version=2020-11-01'
@@ -431,7 +431,7 @@ class AzureApi():
             print(foo['name'], foo['regionalDisplayName'], foo['displayName'])
 
     # 创建vm
-    def create_vm(self, location = 'eastasia', vm_name = 'cdntip', vm_size = 'Standard_F2s', username = 'cdntip', password='admin7788==', nic_id='', urn='OpenLogic:CentOS:7.5:latest'):
+    def create_vm(self, location = 'eastasia', vm_name = 'panel', vm_size = 'Standard_F2s', username = 'panel', password='admin7788==', nic_id='', urn='OpenLogic:CentOS:7.5:latest'):
         print(urn)
         try:
             urn = urn.split(':')
