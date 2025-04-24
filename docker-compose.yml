@@ -1,7 +1,12 @@
+version: '3.8'
+
+x-platform: &platform
+  platform: ${PLATFORM:-linux/amd64}  # 默认使用 amd64，可通过环境变量覆盖
+
 services:
   mysql:
     image: mysql:8.0-debian
-    platform: linux/amd64
+    <<: *platform
     container_name: panel_mysql
     restart: always
     environment:
@@ -20,32 +25,40 @@ services:
 
   redis:
     image: redis:7.0-alpine
-    platform: linux/amd64
+    <<: *platform
     container_name: panel_redis
     restart: always
     networks:
       - panel_network
     volumes:
       - ./data/redis:/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
 
   panel:
     build:
       context: .
       dockerfile: Dockerfile
-    platform: linux/amd64
+      args:
+        TARGETPLATFORM: ${PLATFORM:-linux/amd64}
+    image: ${DOCKER_IMAGE:-nodewebzsz/cloudpanel:latest}
+    <<: *platform
     container_name: panel
     restart: always
     ports:
-      - "8111:889"
+      - "${PORT:-8111}:889"
     depends_on:
       mysql:
         condition: service_healthy
       redis:
-        condition: service_started
+        condition: service_healthy
     networks:
       - panel_network
     volumes:
-      - ./logs:/app/logs
+      - ./logs:/home/python/panel/logs
     env_file:
       - .env
     environment:
@@ -57,6 +70,12 @@ services:
       - MYSQL_PASSWORD=root
       - REDIS_HOST=redis
       - REDIS_PORT=6379
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:889/health/"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
 
 networks:
   panel_network:

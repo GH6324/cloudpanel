@@ -18,6 +18,18 @@ docker pull nodewebzsz/cloudpanel:latest
 - `x.y.z`: 特定版本号
 - `x.y`: 特定主要版本
 
+### 多架构支持
+
+本项目支持在 AMD64 和 ARM64 架构上运行。您可以根据服务器架构选择合适的版本：
+
+```bash
+# AMD64 架构 (Intel/AMD CPU)
+docker pull --platform linux/amd64 nodewebzsz/cloudpanel:latest
+
+# ARM64 架构 (Apple M1/M2, AWS Graviton)
+docker pull --platform linux/arm64 nodewebzsz/cloudpanel:latest
+```
+
 ## 功能特点
 
 - 多云服务提供商支持（AWS、Azure、DigitalOcean、Linode）
@@ -29,9 +41,9 @@ docker pull nodewebzsz/cloudpanel:latest
 
 ## 系统要求
 
-- Docker
+- Docker 19.03+ (支持多架构构建)
 - Docker Compose
-- x86 架构（暂不支持 ARM 架构）
+- x86_64/ARM64 架构
 
 ## 快速开始
 
@@ -53,14 +65,27 @@ cp .env.example .env
 vim .env
 ```
 
+环境变量配置示例：
+```bash
+# 平台架构选择 (linux/amd64 或 linux/arm64)
+PLATFORM=linux/amd64
+
+# Docker 镜像设置
+DOCKER_IMAGE=nodewebzsz/cloudpanel:latest
+
+# 端口设置
+PORT=8111
+```
+
 3. 构建并启动服务：
 
 ```bash
-# 构建镜像并启动服务
-docker-compose up -d --build
+# AMD64 架构
+echo "PLATFORM=linux/amd64" > .env
+docker-compose up -d
 
-# 或者分步执行
-docker-compose build
+# 或 ARM64 架构
+echo "PLATFORM=linux/arm64" > .env
 docker-compose up -d
 ```
 
@@ -107,20 +132,7 @@ docker run -d -it \
   --network panel_network \
   -p 8111:80 \
   --name panel \
-  panel/panel
-```
-
-#### 4. 创建管理员账户
-
-```bash
-docker exec -it panel /bin/bash
-python manage.py createsuperuser --username admin --email admin@admin.com
-```
-
-#### 5. 初始化 AWS 镜像数据（可选）
-
-```bash
-python manage.py aws_update_images
+  nodewebzsz/cloudpanel:latest
 ```
 
 ## 访问平台
@@ -139,6 +151,42 @@ python manage.py aws_update_images
 - 日志查看：查看系统操作日志
 
 > 注意：请确保使用管理员账户登录管理后台，普通用户无法访问此页面。
+
+## 多架构部署注意事项
+
+1. **架构选择**：
+   - AMD64：适用于 Intel/AMD 处理器（最常见）
+   - ARM64：适用于 Apple M1/M2、AWS Graviton 等 ARM 处理器
+
+2. **性能考虑**：
+   - 确保使用匹配硬件的正确架构
+   - ARM64 架构下某些依赖包可能需要额外的编译时间
+   - 适当设置容器资源限制
+
+3. **数据迁移**：
+   - 不同架构间的数据文件不能直接迁移
+   - 需要通过导出/导入方式迁移数据
+
+4. **健康检查**：
+   所有服务都配置了健康检查，可以通过以下命令查看状态：
+   ```bash
+   docker-compose ps
+   docker-compose logs
+   ```
+
+5. **资源限制配置**：
+   ```yaml
+   services:
+     panel:
+       deploy:
+         resources:
+           limits:
+             cpus: '1.0'
+             memory: 1G
+           reservations:
+             cpus: '0.5'
+             memory: 512M
+   ```
 
 ## 开发说明
 
@@ -193,7 +241,7 @@ python manage.py aws_update_images
 ## 注意事项
 
 1. 当前版本为预览版本，功能持续更新中
-2. 仅支持 x86 平台的 Docker 部署
+2. 支持 x86_64 和 ARM64 架构的 Docker 部署
 3. 如遇到问题，请在 Issues 中反馈
 4. 请确保妥善保管环境变量文件，不要将其提交到版本控制系统
 
@@ -217,30 +265,6 @@ python manage.py aws_update_images
 ## 许可证
 
 本项目采用 MIT 许可证。详见 [LICENSE](LICENSE) 文件。
-
-```
-MIT License
-
-Copyright (c) 2024 CloudPanel
-
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
-
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
-
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-```
 
 ## 联系方式
 
