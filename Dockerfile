@@ -46,9 +46,6 @@ RUN mkdir -p /etc/supervisor/conf.d \
     && chmod +x entrypoint.sh \
     && rm -rf .git
 
-# 暴露端口
-EXPOSE 8111
-
 # 健康检查
 HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
     CMD curl -f http://localhost:8111/health/ || exit 1

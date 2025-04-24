@@ -1,3 +1,4 @@
+
 version: '3.8'
 
 x-platform: &platform
@@ -5,8 +6,7 @@ x-platform: &platform
 
 services:
   mysql:
-    image: mysql:8.0-debian
-    <<: *platform
+    image: mysql:lts-oraclelinux9
     container_name: panel_mysql
     restart: always
     environment:
@@ -24,8 +24,7 @@ services:
       retries: 5
 
   redis:
-    image: redis:7.0-alpine
-    <<: *platform
+    image: redis:latest
     container_name: panel_redis
     restart: always
     networks:
@@ -38,13 +37,20 @@ services:
       timeout: 5s
       retries: 5
 
-  panel:
-    build:
-      context: .
-      dockerfile: Dockerfile
-      args:
-        TARGETPLATFORM: ${PLATFORM:-linux/amd64}
-    image: ${DOCKER_IMAGE:-zszken/cloudpanel:latest}
+  web:
+    image: kissyouhunter/cloudpanel:web
+    container_name: cloudpanel-web
+    restart: always
+    ports:
+        - '8086:8080'
+    depends_on:
+        - api
+    command: [ 'nginx-debug', '-g', 'daemon off;' ]
+    networks:
+      - panel_network
+
+  api:
+    image: zszken/cloudpanel:latest
     <<: *platform
     container_name: panel
     restart: always
@@ -61,15 +67,15 @@ services:
       - ./logs:/home/python/panel/logs
     env_file:
       - .env
-    environment:
-      - DJANGO_SETTINGS_MODULE=panelProject.settings
-      - MYSQL_HOST=mysql
-      - MYSQL_PORT=3306
-      - MYSQL_DATABASE=panel
-      - MYSQL_USER=root
-      - MYSQL_PASSWORD=root
-      - REDIS_HOST=redis
-      - REDIS_PORT=6379
+    # environment:
+    #   - DJANGO_SETTINGS_MODULE=panelProject.settings
+    #   - MYSQL_HOST=mysql
+    #   - MYSQL_PORT=3306
+    #   - MYSQL_DATABASE=panel
+    #   - MYSQL_USER=root
+    #   - MYSQL_PASSWORD=root
+    #   - REDIS_HOST=redis
+    #   - REDIS_PORT=6379
     healthcheck:
       test: ["CMD", "curl", "-f", "http://localhost:889/health/"]
       interval: 30s
