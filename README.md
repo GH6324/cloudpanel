@@ -10,7 +10,7 @@ CloudPanel 是一个强大的多云服务管理平台，支持管理和监控多
 最新版本的 Docker 镜像可以从 Docker Hub 获取：
 
 ```bash
-docker pull nodewebzsz/cloudpanel:latest
+docker pull zszken/cloudpanel:latest
 ```
 
 支持的标签：
@@ -24,10 +24,10 @@ docker pull nodewebzsz/cloudpanel:latest
 
 ```bash
 # AMD64 架构 (Intel/AMD CPU)
-docker pull --platform linux/amd64 nodewebzsz/cloudpanel:latest
+docker pull --platform linux/amd64 zszken/cloudpanel:latest
 
 # ARM64 架构 (Apple M1/M2, AWS Graviton)
-docker pull --platform linux/arm64 nodewebzsz/cloudpanel:latest
+docker pull --platform linux/arm64 zszken/cloudpanel:latest
 ```
 
 ## 功能特点
@@ -71,7 +71,7 @@ vim .env
 PLATFORM=linux/amd64
 
 # Docker 镜像设置
-DOCKER_IMAGE=nodewebzsz/cloudpanel:latest
+DOCKER_IMAGE=zszken/cloudpanel:latest
 
 # 端口设置
 PORT=8111
@@ -132,7 +132,7 @@ docker run -d -it \
   --network panel_network \
   -p 8111:80 \
   --name panel \
-  nodewebzsz/cloudpanel:latest
+  zszken/cloudpanel:latest
 ```
 
 ## 访问平台
