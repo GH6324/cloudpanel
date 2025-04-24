@@ -1,0 +1,16 @@
+django==4.2
+django-cors-headers
+django-redis
+celery
+requests
+boto3
+kombu
+pymysql
+azure-mgmt==4.0.0
+azure-mgmt-authorization==0.50.0
+azure-mgmt-compute==4.6.2
+azure-mgmt-managementgroups==0.1.0
+azure-mgmt-network==2.7.0
+azure-mgmt-resource==2.2.0
+azure-mgmt-subscription==0.2.0
+python-dotenv
