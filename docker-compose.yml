@@ -44,7 +44,7 @@ services:
       dockerfile: Dockerfile
       args:
         TARGETPLATFORM: ${PLATFORM:-linux/amd64}
-    image: ${DOCKER_IMAGE:-nodewebzsz/cloudpanel:latest}
+    image: ${DOCKER_IMAGE:-zszken/cloudpanel:latest}
     <<: *platform
     container_name: panel
     restart: always
