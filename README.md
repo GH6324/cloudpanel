@@ -111,6 +111,19 @@ python manage.py aws_update_images
 
 在浏览器中访问：`http://your-server-ip:8111`
 
+### 管理后台
+
+管理员可以通过以下地址访问管理后台：`http://your-server-ip:8111/api/admin`
+
+管理后台功能包括：
+- 用户管理：创建、编辑、删除用户
+- 权限管理：分配和管理用户权限
+- 云服务管理：管理各云服务提供商的配置
+- 系统设置：管理系统全局配置
+- 日志查看：查看系统操作日志
+
+> 注意：请确保使用管理员账户登录管理后台，普通用户无法访问此页面。
+
 ## 开发说明
 
 ### 项目结构
@@ -215,6 +228,6 @@ SOFTWARE.
 
 ## 联系方式
 
-- 项目维护者：@cdntip
-- 项目主页：[GitHub 仓库地址]
+- 项目维护者：@Nodewebzsz
+- 项目主页：[https://github.com/Nodewebzsz/cloudpanel]
 - 问题反馈：请使用 GitHub Issues
