@@ -1,7 +1,7 @@
 # CloudPanel
 
 [![Docker Image CI/CD](https://github.com/Nodewebzsz/cloudpanel/actions/workflows/docker-publish.yml/badge.svg)](https://github.com/Nodewebzsz/cloudpanel/actions/workflows/docker-publish.yml)
-[![Docker Pulls](https://img.shields.io/docker/pulls/nodewebzsz/cloudpanel)](https://hub.docker.com/r/nodewebzsz/cloudpanel)
+[![Docker Pulls](https://img.shields.io/docker/pulls/zszken/cloudpanel)](https://hub.docker.com/r/zszken/cloudpanel)
 
 CloudPanel 是一个强大的多云服务管理平台，支持管理和监控多个主流云服务提供商的资源。通过统一的界面，轻松管理 AWS、Azure、DigitalOcean 和 Linode 等云服务资源。
 
