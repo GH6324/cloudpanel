@@ -85,7 +85,7 @@ echo "PLATFORM=linux/amd64" > .env
 docker-compose up -d
 
 # 或 ARM64 架构
-echo "PLATFORM=linux/arm64" > .env
+echo "PLATFORM=linux/arm64/v8" > .env
 docker-compose up -d
 ```
 
