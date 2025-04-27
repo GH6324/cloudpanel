@@ -27,7 +27,7 @@ docker pull zszken/cloudpanel:latest
 docker pull --platform linux/amd64 zszken/cloudpanel:latest
 
 # ARM64 架构 (Apple M1/M2, AWS Graviton)
-docker pull --platform linux/arm64 zszken/cloudpanel:latest
+docker pull --platform linux/arm64/v8 zszken/cloudpanel:latest
 ```
 
 ## 功能特点
@@ -43,7 +43,6 @@ docker pull --platform linux/arm64 zszken/cloudpanel:latest
 
 - Docker 19.03+ (支持多架构构建)
 - Docker Compose
-- x86_64/ARM64 架构
 
 ## 快速开始
 
