@@ -44,6 +44,12 @@ docker pull --platform linux/arm64/v8 zszken/cloudpanel:latest
 - Docker 19.03+ (支持多架构构建)
 - Docker Compose
 
+## 前端页面展示
+![页面截图](./image.png)
+![页面截图](./screen.png)
+
+
+
 ## 快速开始
 
 ### 方式一：使用 Docker Compose 本地构建部署（推荐）
