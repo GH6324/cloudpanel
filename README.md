@@ -276,3 +276,7 @@ docker run -d -it \
 - 项目维护者：@Nodewebzsz
 - 项目主页：[https://github.com/Nodewebzsz/cloudpanel]
 - 问题反馈：请使用 GitHub Issues
+
+
+## Stargazers over time
+[![Stargazers over time](https://starchart.cc/Nodewebzsz/cloudpanel.svg?variant=adaptive)](https://starchart.cc/Nodewebzsz/cloudpanel)
