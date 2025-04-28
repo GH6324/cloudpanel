@@ -278,5 +278,10 @@ docker run -d -it \
 - 问题反馈：请使用 GitHub Issues
 
 
+## Star History
+
+[![Star History Chart](https://api.star-history.com/svg?repos=Nodewebzsz/cloudpanel&type=Date)](https://www.star-history.com/#Nodewebzsz/cloudpanel&Date)
+
+
 ## Stargazers over time
 [![Stargazers over time](https://starchart.cc/Nodewebzsz/cloudpanel.svg?variant=adaptive)](https://starchart.cc/Nodewebzsz/cloudpanel)
