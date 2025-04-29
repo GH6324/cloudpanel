@@ -154,11 +154,11 @@ docker run -d -it \
   zszken/cloudpanel:latest
 ```
 
-## 访问平台
+## 访问前端平台
 
-在浏览器中访问：`http://your-server-ip:8111`
+在浏览器中访问：`http://your-server-ip:8086`
 
-### 管理后台
+### 管理数据库后台
 
 管理员可以通过以下地址访问管理后台：`http://your-server-ip:8111/api/admin`
 
