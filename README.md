@@ -59,18 +59,24 @@ docker pull --platform linux/arm64/v8 zszken/cloudpanel:latest
 mkdir cloudpanel
 ```
 
-1. 创建必要的目录：
+2. 创建必要的目录：
 
 ```bash
 cd cloudpanel && mkdir -p data/mysql data/redis logs
 
 ```
 
-2. 配置环境变量：
+
+3. 下载docker-compose部署文件
+```bash
+wget https://raw.githubusercontent.com/Nodewebzsz/cloudpanel/refs/heads/main/docker-compose.yml -O docker-compose.yml  
+
+```
+
+
+4. 配置环境变量：
 
 ```bash
-
-
 # 复制环境变量示例文件
  wget https://raw.githubusercontent.com/Nodewebzsz/cloudpanel/refs/heads/main/.env.example -O .env   
 
@@ -90,7 +96,7 @@ DOCKER_IMAGE=zszken/cloudpanel:latest
 PORT=8111
 ```
 
-3. 构建并启动服务：
+5. 构建并启动服务：
 
 ```bash
 # AMD64 架构
@@ -102,14 +108,14 @@ echo "PLATFORM=linux/arm64/v8" > .env
 docker-compose up -d
 ```
 
-4. 创建管理员账户：
+6. 创建管理员账户：
 
 ```bash
 docker exec -it panel /bin/bash
 python manage.py createsuperuser --username admin --email admin@admin.com
 ```
 
-5. 初始化 AWS 镜像数据（可选）：
+7. 初始化 AWS 镜像数据（可选）：
 
 ```bash
 python manage.py aws_update_images
