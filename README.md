@@ -54,19 +54,27 @@ docker pull --platform linux/arm64/v8 zszken/cloudpanel:latest
 
 ### 方式一：使用 Docker Compose 本地构建部署（推荐）
 
+1. 部署项目文件夹：
+```bash
+mkdir cloudpanel
+```
+
 1. 创建必要的目录：
 
 ```bash
-mkdir -p data/mysql data/redis logs
+cd cloudpanel && mkdir -p data/mysql data/redis logs
+
 ```
 
 2. 配置环境变量：
 
 ```bash
-# 复制环境变量示例文件
-cp .env.example .env
 
-# 编辑环境变量文件，填入必要的配置信息
+
+# 复制环境变量示例文件
+ wget https://raw.githubusercontent.com/Nodewebzsz/cloudpanel/refs/heads/main/.env.example -O .env   
+
+# 编辑环境变量文件，填入必要的配置信息。不修改也无妨
 vim .env
 ```
 
