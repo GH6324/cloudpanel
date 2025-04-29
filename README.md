@@ -52,7 +52,7 @@ docker pull --platform linux/arm64/v8 zszken/cloudpanel:latest
 
 ## 快速开始
 
-### 方式一：使用 Docker Compose 本地构建部署（推荐）
+### 使用 Docker Compose 本地构建部署
 
 #### 1. 部署项目文件夹：
 ```bash
@@ -121,38 +121,6 @@ python manage.py createsuperuser --username admin --email admin@admin.com
 python manage.py aws_update_images
 ```
 
-### 方式二：手动部署
-
-#### 1. 创建 Docker 网络
-
-```bash
-docker network create panel_network
-```
-
-#### 2. 启动 MySQL 数据库
-
-```bash
-mkdir /data
-docker run -d -it \
-  --network panel_network \
-  -v /data/mysql:/var/lib/mysql \
-  --name panel_mysql \
-  -e MYSQL_ROOT_PASSWORD=root \
-  -e MYSQL_DATABASE=panel \
-  mysql:5.7 \
-  --character-set-server=utf8mb4 \
-  --collation-server=utf8mb4_unicode_ci
-```
-
-#### 3. 启动 CloudPanel
-
-```bash
-docker run -d -it \
-  --network panel_network \
-  -p 8111:80 \
-  --name panel \
-  zszken/cloudpanel:latest
-```
 
 ## 访问前端平台
 
