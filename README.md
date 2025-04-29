@@ -54,12 +54,12 @@ docker pull --platform linux/arm64/v8 zszken/cloudpanel:latest
 
 ### 方式一：使用 Docker Compose 本地构建部署（推荐）
 
-1. 部署项目文件夹：
+#### 1. 部署项目文件夹：
 ```bash
 mkdir cloudpanel
 ```
 
-2. 创建必要的目录：
+#### 2. 创建必要的目录：
 
 ```bash
 cd cloudpanel && mkdir -p data/mysql data/redis logs
@@ -67,14 +67,14 @@ cd cloudpanel && mkdir -p data/mysql data/redis logs
 ```
 
 
-3. 下载docker-compose部署文件
+#### 3. 下载docker-compose部署文件
 ```bash
 wget https://raw.githubusercontent.com/Nodewebzsz/cloudpanel/refs/heads/main/docker-compose.yml -O docker-compose.yml  
 
 ```
 
 
-4. 配置环境变量：
+#### 4. 配置环境变量：
 
 ```bash
 # 复制环境变量示例文件
@@ -96,7 +96,7 @@ DOCKER_IMAGE=zszken/cloudpanel:latest
 PORT=8111
 ```
 
-5. 构建并启动服务：
+#### 5. 构建并启动服务：
 
 ```bash
 # AMD64 架构
@@ -108,14 +108,14 @@ echo "PLATFORM=linux/arm64/v8" > .env
 docker-compose up -d
 ```
 
-6. 创建管理员账户：
+#### 6. 创建管理员账户：
 
 ```bash
 docker exec -it panel /bin/bash
 python manage.py createsuperuser --username admin --email admin@admin.com
 ```
 
-7. 初始化 AWS 镜像数据（可选）：
+#### 7. 初始化 AWS 镜像数据（可选）：
 
 ```bash
 python manage.py aws_update_images
