@@ -96,26 +96,14 @@ DOCKER_IMAGE=zszken/cloudpanel:latest
 PORT=8111
 ```
 
-#### 5. 构建并启动服务：
-
-```bash
-# AMD64 架构
-echo "PLATFORM=linux/amd64" > .env
-docker-compose up -d
-
-# 或 ARM64 架构
-echo "PLATFORM=linux/arm64/v8" > .env
-docker-compose up -d
-```
-
-#### 6. 创建管理员账户：
+#### 5. 创建管理员账户：
 
 ```bash
 docker exec -it panel /bin/bash
 python manage.py createsuperuser --username admin --email admin@admin.com
 ```
 
-#### 7. 初始化 AWS 镜像数据（可选）：
+#### 6. 初始化 AWS 镜像数据（可选）：
 
 ```bash
 python manage.py aws_update_images
