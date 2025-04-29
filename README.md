@@ -72,7 +72,7 @@ vim .env
 
 环境变量配置示例：
 ```bash
-# 平台架构选择 (linux/amd64 或 linux/arm64)
+# 平台架构选择 (linux/amd64 或 linux/arm64/v8)
 PLATFORM=linux/amd64
 
 # Docker 镜像设置
