@@ -52,7 +52,7 @@ services:
   api:
     image: zszken/cloudpanel:latest
     <<: *platform
-    container_name: panel
+    container_name: cloudpanel-api
     restart: always
     ports:
       - "${PORT:-8111}:889"

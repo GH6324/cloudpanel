@@ -80,13 +80,13 @@ wget https://raw.githubusercontent.com/Nodewebzsz/cloudpanel/refs/heads/main/doc
 # 复制环境变量示例文件
  wget https://raw.githubusercontent.com/Nodewebzsz/cloudpanel/refs/heads/main/.env.example -O .env   
 
-# 编辑环境变量文件，填入必要的配置信息。不修改也无妨
+# 通过vim或者其他方式编辑修改环境变量文件，填入必要的配置信息，不修改也无妨
 vim .env
 ```
 
 环境变量配置示例：
 ```bash
-# 平台架构选择 (linux/amd64 或 linux/arm64/v8)
+# 平台架构选择 (linux/amd64 或 linux/arm64/v8)，amd选择linux/amd64，arm选择linux/arm64/v8
 PLATFORM=linux/amd64
 
 # Docker 镜像设置
@@ -96,14 +96,33 @@ DOCKER_IMAGE=zszken/cloudpanel:latest
 PORT=8111
 ```
 
-#### 5. 创建管理员账户：
+#### 5. 部署前准备工作
+##### docker、安装docker-compose
+```bash
+apt update -y && apt install -y curl && curl -fsSL https://get.docker.com | bash -s docker
+
+curl -L "https://github.com/docker/compose/releases/latest/download/docker-compose-$(uname -s)-$(uname -m)" -o /usr/local/bin/docker-compose && chmod +x /usr/local/bin/docker-compose
+```
+#### 6. 运行部署命令
+```bash
+docker-compose up -d
+```
+#### 7. 查看默认用户名、密码
+
+docker logs cloudpanel-api
+
+
+
+
+### 其他可选操作，可以忽略
+#### 1. 创建管理员账户：
 
 ```bash
 docker exec -it panel /bin/bash
 python manage.py createsuperuser --username admin --email admin@admin.com
 ```
 
-#### 6. 初始化 AWS 镜像数据（可选）：
+#### 2. 初始化 AWS 镜像数据（可选）：
 
 ```bash
 python manage.py aws_update_images
