@@ -118,7 +118,7 @@ docker logs cloudpanel-api
 #### 1. 创建管理员账户：
 
 ```bash
-docker exec -it panel /bin/bash
+docker exec -it cloudpanel-api /bin/bash
 python manage.py createsuperuser --username admin --email admin@admin.com
 ```
 
