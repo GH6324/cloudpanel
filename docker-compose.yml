@@ -42,7 +42,7 @@ services:
     container_name: cloudpanel-web
     restart: always
     ports:
-        - '8086:8080'
+        - "${FRONTENDPORT:-8086}:8080"
     depends_on:
         - api
     command: [ 'nginx-debug', '-g', 'daemon off;' ]
@@ -55,7 +55,7 @@ services:
     container_name: cloudpanel-api
     restart: always
     ports:
-      - "${PORT:-8111}:889"
+      - "${BACKENDPORT:-8111}:889"
     depends_on:
       mysql:
         condition: service_healthy

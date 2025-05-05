@@ -92,8 +92,9 @@ PLATFORM=linux/amd64
 # Docker 镜像设置
 DOCKER_IMAGE=zszken/cloudpanel:latest
 
-# 端口设置
-PORT=8111
+# 前后端页面访问端口设置,可以在.env文件中自定义前端页面端口FRONTENDPORT，后端数据库管理页面端口BACKENDPORT
+FRONTENDPORT=8086
+BACKENDPORT=8111
 ```
 
 #### 5. 部署前准备工作
