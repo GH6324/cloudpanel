@@ -267,6 +267,9 @@ python manage.py aws_update_images
 - 项目主页：[https://github.com/Nodewebzsz/cloudpanel]
 - 问题反馈：请使用 GitHub Issues
 
+## 致谢
+
+本项目基于 [cdntip/cloudpanel](https://github.com/cdntip/cloudpanel) 二次整合发布，感谢原作者的贡献和开源精神。我们在此向原作者致以诚挚的感谢！
 
 ## Star History
 
